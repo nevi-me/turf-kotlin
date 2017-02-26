@@ -1,7 +1,7 @@
 package za.co.movinggauteng.turfkotlin.measurement
 
 import za.co.movinggauteng.turfkotlin.geojson.Point
-import za.co.movinggauteng.turfkotlin.helpers.getCoord
+import za.co.movinggauteng.turfkotlin.geojson.getCoord
 
 /**
  * Created by Neville on 20 Feb 2017.
@@ -11,8 +11,8 @@ fun bearing(start: Point, end: Point) : Double {
     val degrees2radians = Math.PI / 180
     val radians2degrees = 180 / Math.PI
 
-    val coordinates1 = getCoord(start)
-    val coordinates2 = getCoord(end)
+    val coordinates1 = start.getCoord()
+    val coordinates2 = end.getCoord()
 
     val lon = Pair(degrees2radians * coordinates1.first, degrees2radians * coordinates2.first)
     val lat = Pair(degrees2radians * coordinates1.second, degrees2radians * coordinates2.second)

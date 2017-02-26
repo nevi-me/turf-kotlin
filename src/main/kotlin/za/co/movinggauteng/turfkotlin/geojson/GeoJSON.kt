@@ -1,5 +1,7 @@
 package za.co.movinggauteng.turfkotlin.geojson
 
+import za.co.movinggauteng.turfkotlin.helpers.getCoord
+
 /**
  * A collection of GeoJSON data structures
  */
@@ -53,4 +55,9 @@ class GeometryCollection : Geometry() {
     override var type: String = "GeometryCollection"
     var geometries: MutableList<Geometry> = mutableListOf()
     var properties: Any = Unit
+}
+
+// extensions
+fun Point.getCoord() : Pair<Double, Double> {
+    return getCoord(this)
 }

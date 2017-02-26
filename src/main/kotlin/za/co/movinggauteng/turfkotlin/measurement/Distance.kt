@@ -1,9 +1,9 @@
 package za.co.movinggauteng.turfkotlin.measurement
 
 import za.co.movinggauteng.turfkotlin.geojson.Point
+import za.co.movinggauteng.turfkotlin.geojson.getCoord
 import za.co.movinggauteng.turfkotlin.helpers.Factors
 import za.co.movinggauteng.turfkotlin.helpers.Units
-import za.co.movinggauteng.turfkotlin.helpers.getCoord
 import za.co.movinggauteng.turfkotlin.helpers.point
 import java.lang.Math.*
 
@@ -13,8 +13,8 @@ import java.lang.Math.*
 
 fun distance(start: Point, end: Point, units: Units = Units.KILOMETERS) : Double {
 
-    val coordinates1 = getCoord(start)
-    val coordinates2 = getCoord(end)
+    val coordinates1 = start.getCoord()
+    val coordinates2 = end.getCoord()
 
     // adapted from https://github.com/acmeism/RosettaCodeData/blob/master/Task/Haversine-formula/Kotlin/haversine-formula.kotlin
     val λ1 = toRadians(coordinates1.second)

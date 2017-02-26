@@ -1,9 +1,9 @@
 package za.co.movinggauteng.turfkotlin.measurement
 
 import za.co.movinggauteng.turfkotlin.geojson.Point
+import za.co.movinggauteng.turfkotlin.geojson.getCoord
 import za.co.movinggauteng.turfkotlin.helpers.Units
 import za.co.movinggauteng.turfkotlin.helpers.distanceToRadians
-import za.co.movinggauteng.turfkotlin.helpers.getCoord
 import za.co.movinggauteng.turfkotlin.helpers.point
 
 /**
@@ -13,7 +13,7 @@ import za.co.movinggauteng.turfkotlin.helpers.point
 fun destination(from: Point, distance: Double, bearing: Double, units: Units) : Point {
     val degrees2radians = Math.PI / 180
     val radians2degrees = 180 / Math.PI
-    val coordinates1 = getCoord(from)
+    val coordinates1 = from.getCoord()
     val longitude1 = degrees2radians * coordinates1.first
     val latitude1 = degrees2radians * coordinates1.second
     val bearing_rad = degrees2radians * bearing

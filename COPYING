@@ -1,0 +1,5 @@
+1. This library copies the code in https://github.com/Turfjs/turf, over which Morgan Herlocker holds copyright as licensed under the MIT License.
+
+The license file of the original source code can be inspected at: https://github.com/Turfjs/turf/blob/master/LICENSE
+
+2. Where algorithms or code snippets have been implemented from elsewhere, we explicitly mention this fact on the relevant snippet.

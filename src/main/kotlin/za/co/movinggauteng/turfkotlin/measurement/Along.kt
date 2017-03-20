@@ -18,15 +18,14 @@ fun along(line: LineString, distance: Double, units: Units) : Point {
         if (distance >= travelled && i == coords.size - 1) {
             return@forEachIndexed
         } else if (travelled >= distance) {
-            var overshot = distance - travelled
-            if (overshot == null) {
+            val overshot = distance - travelled
+            if (overshot == 0.0) {
                 val pt = Point()
                 pt.coordinates = list
                 return pt
             } else {
-                var direction = bearing(point(list), point(coords[i - 1])) - 180
-                var interpolated = destination(point(list), overshot, direction, units)
-                return interpolated
+                val direction = bearing(point(list), point(coords[i - 1])) - 180
+                return destination(point(list), overshot, direction, units)
             }
         } else {
             travelled += distance(point(list), point(coords[i + 1]), units)

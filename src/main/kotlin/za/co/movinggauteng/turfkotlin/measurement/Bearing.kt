@@ -7,7 +7,10 @@ import za.co.movinggauteng.turfkotlin.geojson.getCoord
  * Created by Neville on 20 Feb 2017.
  */
 
-fun bearing(start: Point, end: Point) : Double {
+fun bearing(start: Point, end: Point, final: Boolean = false) : Double {
+
+    if (final) return calculateFinalBearing(start, end)
+
     val degrees2radians = Math.PI / 180
     val radians2degrees = 180 / Math.PI
 
@@ -21,4 +24,11 @@ fun bearing(start: Point, end: Point) : Double {
             Math.sin(lat.first) * Math.cos(lat.second) * Math.cos(lon.second - lon.first)
 
     return radians2degrees * Math.atan2(a, b)
+}
+
+private fun calculateFinalBearing(start: Point, end: Point) : Double {
+    // swap the end and start
+    var bear = bearing(end, start)
+    bear = (bear + 180.0) % 360.0
+    return bear
 }

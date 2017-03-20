@@ -6,44 +6,51 @@ import za.co.movinggauteng.turfkotlin.helpers.getCoord
  * A collection of GeoJSON data structures
  */
 
-open class Geometry {
-    open val type: String = ""
-}
+open class Geometry
 
 class Point : Geometry() {
-    override val type: String = "Point"
-    var coordinates: List<Double> = mutableListOf()
+    val type: String = "Point"
+    var coordinates: Coordinate = mutableListOf()
 }
 
 class LineString : Geometry() {
-    override val type: String = "LineString"
-    var coordinates: List<List<Double>> = mutableListOf(mutableListOf())
+    val type: String = "LineString"
+    var coordinates: List<Coordinate> = mutableListOf(mutableListOf())
 }
 
 class Polygon : Geometry() {
-    override val type: String = "Polygon"
-    var coordinates: List<List<List<Double>>> = mutableListOf(mutableListOf(mutableListOf()))
+    val type: String = "Polygon"
+    var coordinates: List<List<Coordinate>> = mutableListOf(mutableListOf(mutableListOf()))
 }
 
 class MultiPoint : Geometry() {
-    override val type = "MultiPoint"
-    var coordinates: List<List<Double>> = mutableListOf(mutableListOf())
+    val type = "MultiPoint"
+    var coordinates: List<Coordinate> = mutableListOf(mutableListOf())
 }
 
 class MultiLineString : Geometry() {
-    override val type = "MultiLineString"
-    var coordinates: List<List<List<Double>>> = mutableListOf(mutableListOf(mutableListOf()))
+    val type = "MultiLineString"
+    var coordinates: List<List<Coordinate>> = mutableListOf(mutableListOf(mutableListOf()))
 }
 
 class MultiPolygon : Geometry() {
-    override val type = "MultiPolygon"
-    var coordinates: List<List<List<List<Double>>>> = mutableListOf(mutableListOf(mutableListOf(mutableListOf())))
+    val type = "MultiPolygon"
+    var coordinates: List<List<List<Coordinate>>> = mutableListOf(mutableListOf(mutableListOf(mutableListOf())))
 }
 
-class Feature {
-    var type: String = "Feature"
+class Feature() {
+    val type: String = "Feature"
     var geometry : Geometry = Geometry()
     var properties: Any = Unit
+
+    constructor(geom: Geometry) : this() {
+        this.geometry = geom
+    }
+
+    constructor(geom: Geometry, properties: Any) : this() {
+        this.geometry = geom
+        this.properties = properties
+    }
 }
 
 class FeatureCollection {
@@ -52,7 +59,7 @@ class FeatureCollection {
 }
 
 class GeometryCollection : Geometry() {
-    override var type: String = "GeometryCollection"
+    val type: String = "GeometryCollection"
     var geometries: MutableList<Geometry> = mutableListOf()
     var properties: Any = Unit
 }
@@ -61,3 +68,6 @@ class GeometryCollection : Geometry() {
 fun Point.getCoord() : Pair<Double, Double> {
     return getCoord(this)
 }
+
+// type aliass
+typealias Coordinate = List<Double>

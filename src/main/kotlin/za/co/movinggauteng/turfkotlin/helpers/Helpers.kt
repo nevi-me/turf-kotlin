@@ -1,13 +1,17 @@
 package za.co.movinggauteng.turfkotlin.helpers
 
-import za.co.movinggauteng.turfkotlin.geojson.Feature
+import za.co.movinggauteng.turfkotlin.geojson.Coordinate
 import za.co.movinggauteng.turfkotlin.geojson.Geometry
+import za.co.movinggauteng.turfkotlin.geojson.LineString
 import za.co.movinggauteng.turfkotlin.geojson.Point
 
 /**
  * Created by Neville on 21 Feb 2017.
  */
 
+/**
+ * @param geometry      a Geometry type, expects a `Feature` or `Point`
+ */
 fun getCoord(geometry: Geometry) : Pair<Double, Double> {
     when(geometry) {
         is Point -> {
@@ -35,18 +39,16 @@ fun distanceToRadians(distance: Double, units: Units = Units.KILOMETERS) : Doubl
     return distance / factor
 }
 
-fun point(list: List<Double>) : Point {
+fun point(list: Coordinate) : Point {
     val point = Point()
     point.coordinates = list
     return point
 }
 
-fun feature(geometry: Geometry, properties: Any = Any()) : Feature {
-    val feature = Feature()
-    feature.properties = properties
-    feature.geometry = geometry
-
-    return feature
+fun lineString(listOfLines: List<Coordinate>) : LineString {
+    val line = LineString()
+    line.coordinates = listOfLines
+    return line
 }
 
 enum class Units {

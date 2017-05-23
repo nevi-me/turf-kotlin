@@ -34,7 +34,7 @@ fun pairFromPoint(coordinates: List<Double>) : Pair<Double, Double> {
     }
 }
 
-fun distanceToRadians(distance: Double, units: Units = Units.KILOMETERS) : Double {
+fun distanceToRadians(distance: Double, units: Units = Units.TURF_KILOMETERS) : Double {
     val factor = Factors[units] ?: throw Exception("Invalid unit supplied")
     return distance / factor
 }
@@ -52,14 +52,15 @@ fun lineString(listOfLines: List<Coordinate>) : LineString {
 }
 
 enum class Units {
-    DEGREES, RADIANS, MILES, KILOMETERS, NAUTICAL_MILES, INCHES, YARDS, METERS, FEET
+    DEGREES, RADIANS, MILES, KILOMETERS, TURF_KILOMETERS, NAUTICAL_MILES, INCHES, YARDS, METERS, FEET
 }
 
 val Factors: Map<Units, Double> = mapOf(
         Pair(Units.DEGREES, 57.2957795),
         Pair(Units.RADIANS, 1.0),
         Pair(Units.MILES, 3960.0),
-        Pair(Units.KILOMETERS, 6373.0),
+        Pair(Units.KILOMETERS, 6371.0),
+        Pair(Units.TURF_KILOMETERS, 6373.0),
         Pair(Units.NAUTICAL_MILES, 3441.145),
         Pair(Units.INCHES, 250905600.0),
         Pair(Units.YARDS, 6969600.0),

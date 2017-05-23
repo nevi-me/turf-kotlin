@@ -10,7 +10,7 @@ import java.lang.StrictMath.*
  * Created by Neville on 25 Feb 2017.
  */
 
-fun distance(start: Point, end: Point, units: Units = Units.KILOMETERS) : Double {
+fun distance(start: Point, end: Point, units: Units = Units.TURF_KILOMETERS) : Double {
 
     val coordinates1 = start.getCoord()
     val coordinates2 = end.getCoord()

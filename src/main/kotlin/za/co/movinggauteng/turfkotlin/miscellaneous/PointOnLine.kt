@@ -1,15 +1,18 @@
-package za.co.movinggauteng.turfkotlin.measurement
+package za.co.movinggauteng.turfkotlin.miscellaneous
 
 import za.co.movinggauteng.turfkotlin.geojson.LineString
 import za.co.movinggauteng.turfkotlin.geojson.Point
 import za.co.movinggauteng.turfkotlin.helpers.Units
 import za.co.movinggauteng.turfkotlin.helpers.point
+import za.co.movinggauteng.turfkotlin.measurement.bearing
+import za.co.movinggauteng.turfkotlin.measurement.destination
+import za.co.movinggauteng.turfkotlin.measurement.distance
 
 /**
  * Takes a Point and a LineString, and calculates the closest Point on the LineString
  */
 
-fun pointOnLine(line: LineString, pt: Point, units: Units = Units.KILOMETERS) : Triple<Point, Int, Double> {
+fun pointOnLine(line: LineString, pt: Point, units: Units = Units.TURF_KILOMETERS) : Triple<Point, Int, Double> {
     val coords = line.coordinates
 
     var closestPt = point(listOf(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY))
@@ -23,16 +26,16 @@ fun pointOnLine(line: LineString, pt: Point, units: Units = Units.KILOMETERS) : 
 
     coords.take(coords.size - 1).forEachIndexed { index, list ->
 
-        var start = point(list)
-        var stop = point(coords[index + 1])
-        var startDist = distance(pt, start, units)
-        var stopDist = distance(pt, stop, units)
-        var sectionLength = distance(start, stop, units)
+        val start = point(list)
+        val stop = point(coords[index + 1])
+        val startDist = distance(pt, start, units)
+        val stopDist = distance(pt, stop, units)
+        val sectionLength = distance(start, stop, units)
         // perpendicular
-        var heightDistance = maxOf(startDist, stopDist)
-        var direction = bearing(start, stop)
-        var perpendicularPt1 = destination(pt, heightDistance, direction + 90.0, units)
-        var perpendicularPt2 = destination(pt, heightDistance, direction - 90.0, units)
+        val heightDistance = maxOf(startDist, stopDist)
+        val direction = bearing(start, stop)
+        val perpendicularPt1 = destination(pt, heightDistance, direction + 90.0, units)
+        val perpendicularPt2 = destination(pt, heightDistance, direction - 90.0, units)
         val intersect = lineIntersects(
                 perpendicularPt1.coordinates[0],
                 perpendicularPt1.coordinates[1],
@@ -83,7 +86,6 @@ fun pointOnLine(line: LineString, pt: Point, units: Units = Units.KILOMETERS) : 
 }
 
 /**
- * TODO the turf.js equivalent of this function returns a JS object instead of a Boolean
  * I will change to an appropriate data structure if I encounter other places where this intersection is used
  */
 fun lineIntersects(line1StartX: Double, line1StartY: Double, line1EndX: Double, line1EndY: Double, line2StartX: Double,

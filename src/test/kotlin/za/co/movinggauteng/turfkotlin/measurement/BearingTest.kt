@@ -1,5 +1,7 @@
 package za.co.movinggauteng.turfkotlin.measurement
 
+import io.kotlintest.matchers.plusOrMinus
+import io.kotlintest.matchers.shouldEqual
 import io.kotlintest.specs.FunSpec
 import za.co.movinggauteng.turfkotlin.helpers.point
 
